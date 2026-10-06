@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block title %}Login | HelpDesk{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <div class="brand large">Help<span>Desk</span></div>
+  <h1>Entrar</h1>
+  <p class="muted">Sistema de gerenciamento de chamados</p>
+  <form method="post">
+    <label>E-mail<input type="email" name="email" required placeholder="seu@email.com"></label>
+    <label>Senha<input type="password" name="password" required></label>
+    <button class="btn primary full">Entrar</button>
+  </form>
+  <div class="demo">Admin: admin@helpdesk.local / Admin123!</div>
+</div>
+{% endblock %}

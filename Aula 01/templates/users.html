@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Usuários | HelpDesk{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Usuários</h1><p class="muted">Gerenciamento de acesso ao sistema</p></div><a class="btn primary" href="{{ url_for('new_user') }}">+ Novo usuário</a></div>
+<section class="panel"><table><thead><tr><th>Nome</th><th>E-mail</th><th>Perfil</th><th>Cadastro</th></tr></thead><tbody>{% for u in users %}<tr><td>{{ u.name }}</td><td>{{ u.email }}</td><td><span class="badge">{{ u.role }}</span></td><td>{{ u.created_at.strftime('%d/%m/%Y') }}</td></tr>{% endfor %}</tbody></table></section>
+{% endblock %}

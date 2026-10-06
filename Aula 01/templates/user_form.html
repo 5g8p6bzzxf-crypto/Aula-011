@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block title %}Novo usuário | HelpDesk{% endblock %}
+{% block content %}<div class="page-head"><h1>Novo usuário</h1></div><section class="panel narrow"><form method="post">
+<label>Nome<input name="name" minlength="3" required></label>
+<label>E-mail<input name="email" type="email" required></label>
+<label>Senha<input name="password" type="password" minlength="6" required></label>
+<label>Perfil<select name="role"><option value="user">Usuário</option><option value="agent">Agente</option><option value="admin">Administrador</option></select></label>
+<div class="actions"><a class="btn" href="{{ url_for('users') }}">Cancelar</a><button class="btn primary">Cadastrar</button></div>
+</form></section>{% endblock %}

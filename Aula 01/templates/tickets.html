@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block title %}Chamados | HelpDesk{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Chamados</h1><p class="muted">Pesquise e acompanhe solicitações</p></div><a class="btn primary" href="{{ url_for('new_ticket') }}">+ Novo chamado</a></div>
+<form class="filters" method="get">
+<input name="q" value="{{ q }}" placeholder="Pesquisar...">
+<select name="status"><option value="">Todos os status</option>{% for x in ['open','in_progress','resolved','closed'] %}<option value="{{ x }}" {% if status==x %}selected{% endif %}>{{ x|replace('_',' ') }}</option>{% endfor %}</select>
+<select name="priority"><option value="">Todas prioridades</option>{% for x in ['low','medium','high','critical'] %}<option value="{{ x }}" {% if priority==x %}selected{% endif %}>{{ x }}</option>{% endfor %}</select>
+<button class="btn">Filtrar</button>
+</form>
+<section class="panel"><table><thead><tr><th>#</th><th>Chamado</th><th>Solicitante</th><th>Prioridade</th><th>Status</th><th>SLA</th></tr></thead><tbody>
+{% for t in tickets %}<tr><td><a href="{{ url_for('ticket_detail', ticket_id=t.id) }}">#{{ t.id }}</a></td><td><strong>{{ t.title }}</strong><br><small>{{ t.category.name }}</small></td><td>{{ t.requester.name }}</td><td><span class="badge {{ t.priority }}">{{ t.priority }}</span></td><td><span class="badge {{ t.status }}">{{ t.status|replace('_',' ') }}</span></td><td>{{ t.due_at.strftime('%d/%m %H:%M') }}</td></tr>{% else %}<tr><td colspan="6" class="empty">Nenhum resultado.</td></tr>{% endfor %}
+</tbody></table></section>
+{% endblock %}

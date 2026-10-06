@@ -1,0 +1,18 @@
+{% extends "base.html" %}{% block title %}Dashboard | HelpDesk{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Dashboard</h1><p class="muted">Visão geral dos chamados</p></div><a class="btn primary" href="{{ url_for('new_ticket') }}">+ Novo chamado</a></div>
+<div class="stats">
+  <div class="stat"><small>Total</small><strong>{{ stats.total }}</strong></div>
+  <div class="stat"><small>Abertos</small><strong>{{ stats.open }}</strong></div>
+  <div class="stat"><small>Em andamento</small><strong>{{ stats.progress }}</strong></div>
+  <div class="stat"><small>Resolvidos</small><strong>{{ stats.resolved }}</strong></div>
+  <div class="stat alert"><small>Críticos</small><strong>{{ stats.critical }}</strong></div>
+</div>
+<section class="panel"><div class="panel-head"><h2>Chamados recentes</h2><a href="{{ url_for('tickets') }}">Ver todos →</a></div>
+{% if recent %}
+<table><thead><tr><th>#</th><th>Título</th><th>Prioridade</th><th>Status</th><th>Atualizado</th></tr></thead><tbody>
+{% for t in recent %}<tr><td><a href="{{ url_for('ticket_detail', ticket_id=t.id) }}">#{{ t.id }}</a></td><td>{{ t.title }}</td><td><span class="badge {{ t.priority }}">{{ t.priority }}</span></td><td><span class="badge {{ t.status }}">{{ t.status|replace('_',' ') }}</span></td><td>{{ t.updated_at.strftime('%d/%m/%Y %H:%M') }}</td></tr>{% endfor %}
+</tbody></table>
+{% else %}<div class="empty">Nenhum chamado encontrado.</div>{% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block title %}Novo chamado | HelpDesk{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Novo chamado</h1><p class="muted">Descreva o problema para a equipe de suporte.</p></div></div>
+<section class="panel narrow"><form method="post">
+<label>Título<input name="title" minlength="5" required placeholder="Ex.: Computador não liga"></label>
+<label>Categoria<select name="category_id" required>{% for c in categories %}<option value="{{ c.id }}">{{ c.name }}</option>{% endfor %}</select></label>
+<label>Prioridade<select name="priority"><option value="low">Baixa</option><option value="medium" selected>Média</option><option value="high">Alta</option><option value="critical">Crítica</option></select></label>
+<label>Descrição<textarea name="description" minlength="10" required rows="7" placeholder="Explique o problema..."></textarea></label>
+<div class="actions"><a class="btn" href="{{ url_for('tickets') }}">Cancelar</a><button class="btn primary">Criar chamado</button></div>
+</form></section>
+{% endblock %}
